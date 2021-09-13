@@ -21,5 +21,10 @@
     Salaries: i: 3: Ending Date of Payment Period
 */
 
+var fs = require("fs");
+var text = fs.readFileSync('Data/Departments.txt', 'utf8');
+var replace = text.replace(/\r|"/g, '')
+var textByLine = replace.split("\n")
 
 
+console.log(textByLine)
