@@ -20,11 +20,29 @@
     Salaries: i: 2: Initial Date of Payment Period
     Salaries: i: 3: Ending Date of Payment Period
 */
+// Reads text (txt) files and turns them into arrays
+let fs = require("fs");
+/*
+let depData = fs.readFileSync('Data/Departments.txt', 'utf8').replace(/\r|"/g, '').split("\n")
+let empDepData = fs.readFileSync('Data/EmployeeDepartments.txt', 'utf8').replace(/\r|"/g, '').split("\n")
+let emp = fs.readFileSync('Data/Employees.txt', 'utf8').replace(/\r|"/g, '').split("\n")
+let salaries = fs.readFileSync('Data/Salaries.txt', 'utf8').replace(/\r|"/g, '').split("\n")
+*/
 
-var fs = require("fs");
-var text = fs.readFileSync('Data/Departments.txt', 'utf8');
-var replace = text.replace(/\r|"/g, '')
-var textByLine = replace.split("\n")
+function parseData(fileName){
+    let data = fs.readFileSync(`Data/${fileName}.txt`, 'utf8').replace(/\r|"/g, '').split("\n")
+    for (let i = 0; i < data.length; i++){
+        data[i] = data[i].split(',')  
+    }
+    return data
+}
+var deps = parseData('Departments')
+var empDeps = parseData('EmployeeDepartments')
+var emps = parseData('Employees')
+var salaries = parseData('Salaries')
 
-
-console.log(textByLine)
+function challenge1(file){
+    for (let i = 0; i < file.length; i++){
+        
+    }
+}
