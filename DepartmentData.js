@@ -20,14 +20,9 @@
     Salaries: i: 2: Initial Date of Payment Period
     Salaries: i: 3: Ending Date of Payment Period
 */
-// Reads text (txt) files and turns them into arrays
+
+// SetUp :
 let fs = require("fs");
-/*
-let depData = fs.readFileSync('Data/Departments.txt', 'utf8').replace(/\r|"/g, '').split("\n")
-let empDepData = fs.readFileSync('Data/EmployeeDepartments.txt', 'utf8').replace(/\r|"/g, '').split("\n")
-let emp = fs.readFileSync('Data/Employees.txt', 'utf8').replace(/\r|"/g, '').split("\n")
-let salaries = fs.readFileSync('Data/Salaries.txt', 'utf8').replace(/\r|"/g, '').split("\n")
-*/
 
 function parseData(fileName){
     let data = fs.readFileSync(`Data/${fileName}.txt`, 'utf8').replace(/\r|"/g, '').split("\n")
@@ -36,13 +31,46 @@ function parseData(fileName){
     }
     return data
 }
+// New file arrays:
 var deps = parseData('Departments')
 var empDeps = parseData('EmployeeDepartments')
 var emps = parseData('Employees')
 var salaries = parseData('Salaries')
 
-function challenge1(file){
-    for (let i = 0; i < file.length; i++){
-        
+function challenge1(array){
+    /* 
+    for (let i = 0; i < array.length; i++){
+        for (let o = 0; o < 10; o++){
+            if (array[i][o] == undefined){
+                break
+            }
+            console.log(array[i][o])
+        }
+        console.log('____________________________________________________________________')
+    }
+    */
+    for (let i = 0; i < array.length; i++){
+        // Skips any past departments and skips to most recent department
+        if (i != array.length - 1){
+            if (array[i][0] == array[i + 1][0]){
+                i++
+            }
+        }
+        // logs names and departments based on department and employee ID
+        for (let o = 0; o < deps.length; o++){
+            if (array[i][1] == deps[o][0]){
+                let depID = deps[o][1]
+                for (let e = 0; e < emps.length; e++){
+                    if (array[i][0] == emps[e][0]){
+                        let empID = emps[e][2] + " " + emps[e][3]
+                        console.log(empID + ', '  + depID)
+                    }
+                }
+            }
+        }
     }
 }
+
+challenge1(empDeps)
+
+
