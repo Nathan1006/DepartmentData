@@ -37,7 +37,7 @@ var empDeps = parseData('EmployeeDepartments')
 var emps = parseData('Employees')
 var salaries = parseData('Salaries')
 
-function challenge1(array){
+function c1Set1(array){
     for (let i = 0; i < array.length; i++){
         // Skips any past departments and skips to most recent department
         if (i != array.length - 1){
@@ -60,7 +60,7 @@ function challenge1(array){
     }
 }
 
-function challenge2(array){
+function c2Set1(array){
     for (let i = 0; i < array.length; i++){
         // Skips any past salaries and skips to current salary
         while (array[i][0] == array[i + 1][0]){
@@ -97,7 +97,7 @@ function challenge2(array){
     }
 }
 
-function challenge3(array){
+function c3Set1(array){
     for (let i = 0; i < array.length; i++){
         // Skips any past departments and skips to most recent department
         if (i != array.length - 1){
@@ -117,7 +117,7 @@ function challenge3(array){
     }
 }
 
-function challenge4(array){
+function c4Set1(array){
     for (let i = 0; i < array.length; i++){
         if (i != array.length - 1){
             if (array[i][0] == array[i + 1][0]){
@@ -133,7 +133,7 @@ function challenge4(array){
     }
 }
 
-function challenge5(array){
+function c5Set1(array){
     for (let i = 0; i < array.length; i++){
         let empRaise = ''
         while (array[i][0] == array[i + 1][0]){
@@ -153,17 +153,95 @@ function challenge5(array){
     }
 }
 
-challenge1(empDeps)
-console.log('__________________________________________________________' + '\n')
+function c1Set2(array){
+    let numF = 0
+    let numM = 0
+    for (let i = 0; i < array.length; i++){
+        switch(array[i][4]){
+            case 'M':
+                numM++
+                break
+            case 'F':
+                numF++
+                break
+        }
+    }
+    console.log("There are " + numM + " males and " + numF + " females!")
+}
 
-challenge2(salaries)
-console.log('__________________________________________________________' + '\n')
+function c2Set2(array){
+    for (let i = 0; i < array.length; i++){
+        let empsPerDep = 0
+        for (let o = 0; o < empDeps.length; o++){
+            if (o != empDeps.length - 1){
+                if (empDeps[o][0] == empDeps[o + 1][0]){
+                    o++
+                }
+            }
+            if (empDeps[o][1] == array[i][0]){
+                empsPerDep++
+            }
+        }
+        console.log("There are " + empsPerDep + " employees in " + array[i][1])
+    }
+}
 
-challenge3(empDeps)
-console.log('__________________________________________________________' + '\n')
+function c3Set2(array){
+    for (let i = 0; i < array.length; i++){
+        let numM = 0
+        let numF = 0
+        for (let o = 0; o < empDeps.length; o++){
+            if (o != empDeps.length - 1){
+                if (empDeps[o][0] == empDeps[o + 1][0]){
+                    o++
+                }
+            }
+            if (array[i][0] == empDeps[o][1]){
+                for (let e = 0; e < emps.length; e++){
+                    if (empDeps[o][0] == emps[e][0]){
+                        switch(emps[e][4]){
+                            case 'M':
+                                numM++
+                                break
+                            case 'F':
+                                numF++
+                                break
+                        }
+                    }
+                }
+            }
+        }
+        console.log("There are " + numM + " male and " + numF + " female employees in " + array[i][1])
+    }
+}
 
-challenge4(empDeps)
-console.log('__________________________________________________________' + '\n')
+function c4Set2(array){
+    for (let i = 0; i < array.length; i++){
+        let totalSal = 0
+        for (let e = 0; e < empDeps.length; e++){
+            if (empDeps[e][3] == "9999-01-01"){
+                if (array[i][0] == empDeps[e][1]){
+                    for (let o = 0; o < salaries.length; o++){
+                        if (empDeps[e][0] == salaries[o][0]){
+                            if (salaries[o][3] == "9999-01-01"){
+                                let sal = parseInt(salaries[o][1])
+                                totalSal += sal
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        console.log(array[i][1] + " " + totalSal)
+    }
+}
+//c1Set1(empDeps)
+//c2Set1(salaries)
+//c3Set1(empDeps)
+//c4Set1(empDeps)
+//c5Set1(salaries)
 
-challenge5(salaries)
-console.log('__________________________________________________________' + '\n')
+//c1Set2(emps)
+//c2Set2(deps)
+//c3Set2(deps)
+//c4Set2(deps)
