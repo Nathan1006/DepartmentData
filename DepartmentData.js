@@ -235,6 +235,38 @@ function c4Set2(array){
         console.log(array[i][1] + " " + totalSal)
     }
 }
+
+function c5Set2(array){
+    for (let i = 0; i < array.length; i++){
+        let totalSalM = 0
+        let totalSalF = 0
+        for (let e = 0; e < empDeps.length; e++){
+            if (empDeps[e][3] == "9999-01-01"){
+                if (array[i][0] == empDeps[e][1]){
+                    for (let o = 0; o < salaries.length; o++){
+                        if (empDeps[e][0] == salaries[o][0]){
+                            if (salaries[o][3] == "9999-01-01"){
+                                for (let g = 0; g < emps.length; g++){
+                                    if (emps[g][0] == salaries[o][0]){
+                                        if (emps[g][4] == 'M'){
+                                            let salM = parseInt(salaries[o][1])
+                                            totalSalM += salM
+                                        }
+                                        if (emps[g][4] == 'F'){
+                                            let salF = parseInt(salaries[o][1])
+                                            totalSalF += salF
+                                        }
+                                    } 
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        console.log('In the department: ' + array[i][1] + ", the total male salary is  " + totalSalM + ' and the total female salary is ' + totalSalF)
+    }
+}
 //c1Set1(empDeps)
 //c2Set1(salaries)
 //c3Set1(empDeps)
@@ -245,3 +277,4 @@ function c4Set2(array){
 //c2Set2(deps)
 //c3Set2(deps)
 //c4Set2(deps)
+//c5Set2(deps)
